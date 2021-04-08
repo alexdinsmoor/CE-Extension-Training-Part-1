@@ -25,14 +25,33 @@
 import React, { useState } from 'react'
 import { ExtensionProvider } from '@looker/extension-sdk-react'
 import { hot } from 'react-hot-loader/root'
+import { ComponentsProvider } from '@looker/components'
+
+import EmbedDashboard from './components/EmbedDashboard'
+import Sidebar from './components/Sidebar'
+import styled from 'styled-components'
 
 
+ 
 export const App: React.FC<{}> = hot(() => {
+
+  const id = 2
+  const filter = 'California'
 
   return (
 
     <ExtensionProvider>
-      <div><h1>Hello World!</h1></div>
+      <ComponentsProvider>
+        <PageLayout>
+          <Sidebar />
+          <EmbedDashboard id={id} />
+        </PageLayout>
+      </ComponentsProvider>
     </ExtensionProvider>
   )
 })
+
+const PageLayout = styled.div`
+  display: grid;
+  grid-template-columns: 192px auto;
+`
